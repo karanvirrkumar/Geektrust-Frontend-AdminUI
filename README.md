@@ -1,6 +1,6 @@
 # Geektrust-Frontend-AdminUI
 
-** Solution**
+**Solution**
 Check the live static preview:- [Check here](https://karanvirrkumar.github.io/Geektrust-Frontend-AdminUI/)
 
 **Problem Statement**
