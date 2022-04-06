@@ -350,20 +350,20 @@ app.controller("MyController", function ($scope) {
     // pagination start
     $scope.currentPage = 1;
     $scope.maxSize = 5;
-    $scope.mySelect = 10;
+    $scope.itemsPerPage = 10;
 
-    $scope.showSelectValue = function (mySelect) {
-        $scope.mySelect = mySelect;
+    $scope.showSelectValue = function (itemsPerPage) {
+        $scope.itemsPerPage = itemsPerPage;
         $scope.paginate = function (value) {
             var begin, end, index;
-            begin = ($scope.currentPage - 1) * $scope.mySelect;
-            end = begin + $scope.mySelect;
+            begin = ($scope.currentPage - 1) * $scope.itemsPerPage;
+            end = begin + $scope.itemsPerPage;
             index = $scope.users.indexOf(value);
             return (begin <= index && index < end);
         };
-        // console.log(mySelect);
+        // console.log(itemsPerPage);
     };
-    $scope.showSelectValue($scope.mySelect);
+    $scope.showSelectValue($scope.itemsPerPage);
 
     $scope.numOfPages = function () {
         return Math.ceil($scope.users.length / 10);
@@ -371,14 +371,27 @@ app.controller("MyController", function ($scope) {
 
     // pagination end
 
-    $scope.selectCurrentPageValues = function () {
-        let start = ($scope.currentPage - 1) * $scope.mySelect
-        let end = start + $scope.mySelect;
+    $scope.selectCurrentPageValues = function (allCheck) {
+        let start = ($scope.currentPage - 1) * $scope.itemsPerPage
+        let end = start + $scope.itemsPerPage;
 
-        for (let index = start; index < end; index++) {
-            if ($scope.users[index]) {
-                $scope.users[index].isSelected = true;
-                $scope.users[index].isDeleted = true;
+        // if false - if we select the values
+        if(!allCheck){
+    
+            for (let index = start; index < end; index++) {
+                if ($scope.users[index]) {
+                    $scope.users[index].isSelected = true;
+                    $scope.users[index].isDeleted = true;
+                }
+            }
+        }
+        // if we deseect all
+        else{
+            for (let index = start; index < end; index++) {
+                if ($scope.users[index]) {
+                    $scope.users[index].isSelected = false;
+                    $scope.users[index].isDeleted = false;
+                }
             }
         }
 
